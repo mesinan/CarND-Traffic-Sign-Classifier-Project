@@ -55,7 +55,7 @@ Increasing epochs does not effected after 30 epochs.
 Then I started to modify the size of the layers of the model. 
 
 I increased sizes of all layers, it increased the accuracy but couldn't exceed 0.920.
-Then I tought that maybe I should start trying grayscale.
+Then I tought that maybe I should start adding some preprocess steps, I started with grayscale. First I got the grayscale of the images, then I normalized images to make input in a defined interval to aviod input unconsistencies for the model.
 Grayscale worked. In less than 10 Epochs, accuracy increased to 0.930 and more.
 Then I decreased the first layer size, because I tought that biggest distinction between signs would be done in higher level layers. 
 As I guessed decreasing size of first convolution layer did not have any negative affect.
@@ -71,10 +71,10 @@ My final model consisted of the following layers:
 | Layer         		|     Description	        					| 
 |:---------------------:|:---------------------------------------------:| 
 | Input         		| 32x32x1 grayscale image   					| 
-| Convolution 3x3     	| 1x1 stride, same padding, outputs 28x28x36 	|
+| Convolution  5x5   	| 1x1 stride, same padding, outputs 28x28x36 	|
 | RELU					|												|
 | Max pooling	      	| 2x2 stride,  outputs 14x14x36 				|
-| Convolution 3x3	    | 1x1 stride,  outputs 10x10x108				|
+| Convolution 5x5    | 1x1 stride,  outputs 10x10x108				|
 | RELU					|												|
 | Max pooling	      	| 2x2 stride,  outputs 5x5x108					|
 | Fully connected		| outputs 2700 									|
@@ -118,6 +118,10 @@ If a well known architecture was chosen:
 #### 1. Choose five German traffic signs found on the web and provide them in the report. For each image, discuss what quality or qualities might be difficult to classify.
 
 Images are listed in ipynb file. 
+I get pictures from google streeet 
+1 of them is pretty good quality (bumpy road)
+3 of them are shot with some angle, not directly facing (Speed limit, keep right, no entry)
+1 of them (Yield) is pretty damaged during google render process and vertical layers in the left side and right side of the sign is tilted, pixels are shifted towards the center of the image. I pick that image because I thought that will be good challange. And it worked perfectly in that sign too.
 
 #### 2. Discuss the model's predictions on these new traffic signs and compare the results to predicting on the test set. At a minimum, discuss what the predictions were, the accuracy on these new predictions, and compare the accuracy to the accuracy on the test set (OPTIONAL: Discuss the results in more detail as described in the "Stand Out Suggestions" part of the rubric).
 
